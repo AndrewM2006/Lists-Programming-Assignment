@@ -39,7 +39,7 @@ namespace Lists_Programming_Assignment
         {
             Random generator = new Random();
             bool exit = false, valid;
-            int listlength=0, remove=0;
+            int listlength=0, remove=0, add=0, occurances=0, numLook=0;
             List <int> numbers = new List<int>();
             for (int i = 0; i < 25; i++)
             {
@@ -143,31 +143,97 @@ namespace Lists_Programming_Assignment
                 }
                 else if (menuOption == "4")
                 {
-                    
+                    valid = false;
+                    Console.Write("What Number Should be Added: ");
+                    while (!valid)
+                    {
+                        if (int.TryParse(Console.ReadLine(), out add))
+                        {
+                            valid = true;
+                            numbers.Add(add);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter a Valid Number");
+                            Console.Write("What Number Should be Added: ");
+                        }
+                    }
+                    listlength = 0;
+                    foreach (int number in numbers)
+                    {
+                        listlength++;
+                        if (listlength < numbers.Count)
+                        {
+                            Console.Write(number + ", ");
+                        }
+                        else
+                        {
+                            Console.WriteLine(number);
+                        }
+                    }
                 }
                 else if (menuOption == "5")
                 {
-                    
+                    occurances = 0;
+                    foreach (int number in numbers.ToList())
+                    {
+                        if (number == 12)
+                        {
+                            occurances++;
+                        }
+                    }
+                    Console.WriteLine($"There are {occurances} occurances of 12");
                 }
                 else if (menuOption == "6")
                 {
-                    
+                    Console.WriteLine($"The largest value is {numbers.Max()}");
                 }
                 else if (menuOption == "7")
                 {
-                    
+                    Console.WriteLine($"The smallest value is {numbers.Min()}");
                 }
                 else if (menuOption == "8")
                 {
-                    
+                    Console.WriteLine($"The sum of the numbers is {numbers.Sum()}");
+                    Console.WriteLine($"The average of the numbers is {numbers.Average()}");
                 }
                 else if (menuOption == "9")
                 {
-                    
+                    var groupedNumbers = numbers.GroupBy(n => n);
+                    var maxFrequency = groupedNumbers.Max(g => g.Count());
+                    var modes = groupedNumbers.Where(g => g.Count() == maxFrequency).Select(g =>g.Key);
+                    Console.WriteLine("The mode(s) are:");
+                    foreach (var mode in modes)
+                    {
+                        Console.WriteLine(mode);
+                    }
                 }
                 else if (menuOption == "10")
                 {
-                    
+                    valid = false;
+                    occurances = 0;
+                    Console.Write("What Number Should be Looked for: ");
+                    while (!valid)
+                    {
+                        if (int.TryParse(Console.ReadLine(), out numLook))
+                        {
+                            valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter a Valid Number");
+                            Console.Write("What Number Should be Looked for: ");
+                        }
+                    }
+                    valid = false;
+                    foreach (int number in numbers.ToList())
+                    {
+                        if (number == numLook)
+                        {
+                            occurances++;
+                        }
+                    }
+                    Console.WriteLine($"There are {occurances} occurances of {numLook}");
                 }
                 else if (menuOption == "E" || menuOption == "e")
                 {
