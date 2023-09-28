@@ -23,7 +23,7 @@ namespace Lists_Programming_Assignment
                 }
                 else if (menuOption == "2")
                 {
-                    
+                    StringList();
                 }
                 else if (menuOption == "Q" || menuOption == "q")
                 {
@@ -61,7 +61,7 @@ namespace Lists_Programming_Assignment
                 Console.WriteLine("2: Make a New List of Random Numbers");
                 Console.WriteLine("3: Remove a Number (by Value)");
                 Console.WriteLine("4: Add a Value to the List");
-                Console.WriteLine("5: Count the Number of Occurrences of a Specified Number");
+                Console.WriteLine("5: Count the Number of Occurrences of 12");
                 Console.WriteLine("6: Print the Largest Value");
                 Console.WriteLine("7: Print the Smallest Value");
                 Console.WriteLine("8: Print the Sum and Average of the Numbers in the List");
@@ -238,6 +238,119 @@ namespace Lists_Programming_Assignment
                 else if (menuOption == "E" || menuOption == "e")
                 {
                     exit = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input");
+                }
+            }
+        }
+        public static void StringList()
+        {
+            List <string> vegetables = new List<string>();
+            bool exit=false, valid=false;
+            int remove;
+            string removeVeg, vegName;
+            vegetables.Add("CARROT"); vegetables.Add("BEET"); vegetables.Add("CELERY"); vegetables.Add("RADISH"); vegetables.Add("CABBAGE");
+            Console.WriteLine("Vegetables");
+            for (int i = 0;  i < vegetables.Count; i++)
+            {
+                Console.WriteLine((i+1) + " - " + vegetables[i]);
+            }
+            while (!exit)
+            {
+                string menuOption;
+                Console.WriteLine("1: Remove a Vegetable by Index");
+                Console.WriteLine("2: Remove a Vegetable by Value");
+                Console.WriteLine("3: Search for a Vegetable");
+                Console.WriteLine("4: Add a Vegetable");
+                Console.WriteLine("5: Sort the List");
+                Console.WriteLine("6: Clear the List");
+                Console.WriteLine("Press E to Exit");
+                menuOption = Console.ReadLine();
+                if (menuOption == "1")
+                {
+                    while (!valid)
+                    {
+                        Console.Write("Sumbit index to be removed: ");
+                        if (int.TryParse(Console.ReadLine(), out remove) && remove > 0 && remove <= vegetables.Count)
+                        {
+                            valid = true;
+                            vegetables.RemoveAt(remove - 1);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Not a valid index try again!");
+                        }
+                    }
+                    valid = false;
+                    Console.WriteLine("Vegetables");
+                    for (int i = 0; i < vegetables.Count; i++)
+                    {
+                        Console.WriteLine((i + 1) + " - " + vegetables[i]);
+                    }
+                }
+                else if (menuOption == "e" || menuOption == "E")
+                {
+                    exit = true;
+                }
+                else if (menuOption == "2")
+                {
+                    Console.Write("Submit a vegetable to be removed: ");
+                    removeVeg=Console.ReadLine().ToUpper();
+                    if (vegetables.Contains(removeVeg))
+                    {
+                        vegetables.Remove(removeVeg);
+                    }
+                    Console.WriteLine("Vegetables");
+                    for (int i = 0; i < vegetables.Count; i++)
+                    {
+                        Console.WriteLine((i + 1) + " - " + vegetables[i]);
+                    }
+                }
+                else if (menuOption == "3")
+                {
+                    Console.Write("Submit a vegetable to search: ");
+                    vegName = Console.ReadLine().ToUpper();
+                    if (vegetables.Contains(vegName))
+                    {
+                        Console.WriteLine($"{vegName} is found at {vegetables.IndexOf(vegName)+1}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{vegName} was not found");
+                    }
+                }
+                else if (menuOption == "4")
+                {
+                    Console.Write("Submit a vegetable to add: ");
+                    vegName = Console.ReadLine().ToUpper();
+                    if (vegetables.Contains(vegName))
+                    {
+                        Console.WriteLine($"{vegName} is already in the list");
+                    }
+                    else
+                    {
+                        vegetables.Add(vegName);
+                    }
+                    Console.WriteLine("Vegetables");
+                    for (int i = 0; i < vegetables.Count; i++)
+                    {
+                        Console.WriteLine(i + 1 + " - " + vegetables[i]);
+                    }
+                }
+                else if (menuOption == "5")
+                {
+                    vegetables.Sort();
+                    Console.WriteLine("Vegetables");
+                    for (int i = 0; i < vegetables.Count; i++)
+                    {
+                        Console.WriteLine(i + 1 + " - " + vegetables[i]);
+                    }
+                }
+                else if (menuOption == "6")
+                {
+                    vegetables.Clear();
                 }
                 else
                 {
